@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] KeyCode up;
     [SerializeField] KeyCode down;
 
-    public bool canjump = true;
+    
     void Start()
     {
 
