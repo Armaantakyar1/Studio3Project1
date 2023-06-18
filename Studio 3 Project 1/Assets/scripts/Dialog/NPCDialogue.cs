@@ -6,15 +6,15 @@ using UnityEngine.UI;
 
 public enum DialogueState
 {
-    NotInRange,
-    InRange,
+    NotEngaged,
+    Engaged,
     InDialogue,
     InDialogueOptions,
     ExitingDialogue
 }
 public class NPCDialogue : MonoBehaviour
 {
-    DialogueState dialogueState = DialogueState.NotInRange;
+    DialogueState dialogueState = DialogueState.NotEngaged;
     PlayerDialogue playerDialogue;
     Queue<string> dialogueText = new ();
     Queue<string> dialogueSpeaker = new ();
@@ -42,7 +42,7 @@ public class NPCDialogue : MonoBehaviour
     {
         switch (dialogueState)
         {
-            case DialogueState.InRange:
+            case DialogueState.Engaged:
                 playerDialogue.DialogueUI.SetActive(true);
                 StartDialogue(dialogue.IntroLines);
                 break;
@@ -85,12 +85,17 @@ public class NPCDialogue : MonoBehaviour
         }
     }
 
+    public void EnterDialog()
+    {
+        dialogueState = DialogueState.Engaged;
+    }
+
     void ExitDialogue()
     {
         playerDialogue.DialogueText.SetActive(false);
         playerDialogue.DialogueUI.SetActive(false);
         playerDialogue.DialogueOptions.SetActive(false);
-        dialogueState = DialogueState.InRange;
+        dialogueState = DialogueState.Engaged;
     }
 
     void SelectOption(DialogueOptions dialogueOptions)
@@ -125,18 +130,5 @@ public class NPCDialogue : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.TryGetComponent(out playerDialogue))
-        {
-            dialogueState = DialogueState.InRange;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        dialogueState = DialogueState.NotInRange;
-    }
+ 
 }
-
-
