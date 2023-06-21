@@ -5,12 +5,31 @@ using TMPro;
 
 public class EvidenceCollecter : MonoBehaviour
 {
-    public string evidenceTag = "Evidence"; 
     public List<GameObject> collectedEvidence = new List<GameObject>(); 
-    public TextMeshProUGUI evidenceNameText;
+
     public void AddEvidence(GameObject Evidence)
     {
         collectedEvidence.Add(Evidence);
-        evidenceNameText.text = Evidence.gameObject.name;
+
+        if (collectedEvidence.Count >= 2)
+        {
+            CompareObjects();
+        }
+
+    }
+    private void CompareObjects()
+    {
+        GameObject firstObject = collectedEvidence[0];
+        GameObject secondObject = collectedEvidence[1];
+
+        if (firstObject.name == secondObject.name)
+        {
+            Debug.Log("The objects are identical.");
+        }
+        else
+        {
+            Debug.Log("The objects are different.");
+        }
+        collectedEvidence.Clear();
     }
 }
