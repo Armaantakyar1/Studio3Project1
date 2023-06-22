@@ -6,7 +6,7 @@ using TMPro;
 public class EvidenceCollecter : MonoBehaviour
 {
     public List<string> collectedEvidence = new List<string>();
-    [SerializeField] GameObject field;
+    
 
     public void AddEvidence(string Evidence)
     {
