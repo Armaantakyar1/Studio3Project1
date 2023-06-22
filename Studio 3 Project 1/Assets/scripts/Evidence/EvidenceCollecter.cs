@@ -5,9 +5,10 @@ using TMPro;
 
 public class EvidenceCollecter : MonoBehaviour
 {
-    public List<GameObject> collectedEvidence = new List<GameObject>(); 
+    public List<string> collectedEvidence = new List<string>();
+    [SerializeField] GameObject field;
 
-    public void AddEvidence(GameObject Evidence)
+    public void AddEvidence(string Evidence)
     {
         collectedEvidence.Add(Evidence);
 
@@ -19,10 +20,10 @@ public class EvidenceCollecter : MonoBehaviour
     }
     private void CompareObjects()
     {
-        GameObject firstObject = collectedEvidence[0];
-        GameObject secondObject = collectedEvidence[1];
+        string firstObject = collectedEvidence[0];
+        string secondObject = collectedEvidence[1];
 
-        if (firstObject.name == secondObject.name)
+        if (firstObject == secondObject)
         {
             Debug.Log("The objects are identical.");
         }
